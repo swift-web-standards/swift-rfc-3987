@@ -35,13 +35,28 @@ extension RFC_3987 {
 
         /// Creates an IRI from a string with validation
         ///
+        /// This initializer validates the IRI and throws an error if invalid.
+        /// For a non-throwing alternative, use `init(uncheckedString:)` or `try?`.
+        ///
+        /// Example:
+        /// ```swift
+        /// let iri = try RFC_3987.IRI("https://example.com/寿司")
+        /// ```
+        ///
         /// - Parameter value: The IRI string
-        /// - Throws: IRIError if the string is not a valid IRI
+        /// - Throws: IRIError.invalidIRI if the string is not a valid IRI
         public init(_ value: String) throws {
             guard RFC_3987.isValidIRI(value) else {
                 throw IRIError.invalidIRI(value)
             }
             self.value = value
+        }
+
+        /// Creates an IRI from a Foundation URL
+        ///
+        /// - Parameter url: The URL to convert to an IRI
+        public init(url: URL) {
+            self.value = url.absoluteString
         }
 
         /// Creates an IRI from a string without validation (for internal use)
@@ -51,13 +66,17 @@ extension RFC_3987 {
             self.value = value
         }
 
-        /// Converts this IRI to a URI
+        /// The ASCII-compatible URI string representation of this IRI
         ///
         /// Per RFC 3987 Section 3.1, IRIs can be converted to URIs by
         /// percent-encoding characters that are not allowed in URIs.
         ///
-        /// - Returns: The URI representation of this IRI
-        public func toURI() -> String {
+        /// Example:
+        /// ```swift
+        /// let iri = try RFC_3987.IRI("https://example.com/hello world")
+        /// print(iri.uriString) // "https://example.com/hello%20world"
+        /// ```
+        public var uriString: String {
             // Use Foundation's URL encoding which performs the necessary
             // percent-encoding for characters not allowed in URIs
             guard let url = URL(string: value) else {
@@ -276,5 +295,13 @@ extension RFC_3987.IRI: ExpressibleByStringLiteral {
 extension RFC_3987.IRI: CustomStringConvertible {
     public var description: String {
         value
+    }
+}
+
+// MARK: - CustomDebugStringConvertible
+
+extension RFC_3987.IRI: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        "IRI(\"\(value)\")"
     }
 }

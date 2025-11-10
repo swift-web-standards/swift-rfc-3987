@@ -98,11 +98,11 @@ print(normalized.value) // "https://example.com/path"
 
 ```swift
 let iri = try RFC_3987.IRI("https://example.com/hello world")
-let asciiString = iri.toURI()
+let asciiString = iri.uriString
 print(asciiString) // "https://example.com/hello%20world"
 ```
 
-The `toURI()` method produces an ASCII-compatible string representation using percent-encoding.
+The `uriString` property provides an ASCII-compatible string representation using percent-encoding.
 
 ## IRI vs URI
 

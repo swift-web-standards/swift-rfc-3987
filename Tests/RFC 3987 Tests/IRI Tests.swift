@@ -63,57 +63,57 @@ struct IRICreationTests {
 struct IRINormalizationTests {
 
     @Test("Normalize scheme to lowercase")
-    func normalizeScheme() throws {
-        let iri = try RFC_3987.IRI("HTTPS://example.com")
+    func normalizeScheme() {
+        let iri: RFC_3987.IRI = "HTTPS://example.com"
         let normalized = iri.normalized()
         #expect(normalized.value.hasPrefix("https://"))
     }
 
     @Test("Normalize host to lowercase")
-    func normalizeHost() throws {
-        let iri = try RFC_3987.IRI("https://EXAMPLE.COM")
+    func normalizeHost() {
+        let iri: RFC_3987.IRI = "https://EXAMPLE.COM"
         let normalized = iri.normalized()
         #expect(normalized.value.contains("example.com"))
     }
 
     @Test("Remove default HTTP port")
-    func removeDefaultHTTPPort() throws {
-        let iri = try RFC_3987.IRI("http://example.com:80/path")
+    func removeDefaultHTTPPort() {
+        let iri: RFC_3987.IRI = "http://example.com:80/path"
         let normalized = iri.normalized()
         #expect(!normalized.value.contains(":80"))
     }
 
     @Test("Remove default HTTPS port")
-    func removeDefaultHTTPSPort() throws {
-        let iri = try RFC_3987.IRI("https://example.com:443/path")
+    func removeDefaultHTTPSPort() {
+        let iri: RFC_3987.IRI = "https://example.com:443/path"
         let normalized = iri.normalized()
         #expect(!normalized.value.contains(":443"))
     }
 
     @Test("Keep non-default port")
-    func keepNonDefaultPort() throws {
-        let iri = try RFC_3987.IRI("https://example.com:8080/path")
+    func keepNonDefaultPort() {
+        let iri: RFC_3987.IRI = "https://example.com:8080/path"
         let normalized = iri.normalized()
         #expect(normalized.value.contains(":8080"))
     }
 
     @Test("Remove dot segments from path")
-    func removeDotSegments() throws {
-        let iri = try RFC_3987.IRI("https://example.com/a/b/c/./../../g")
+    func removeDotSegments() {
+        let iri: RFC_3987.IRI = "https://example.com/a/b/c/./../../g"
         let normalized = iri.normalized()
         #expect(normalized.value.contains("/a/g"))
     }
 
     @Test("Remove leading dot segment")
-    func removeLeadingDot() throws {
-        let iri = try RFC_3987.IRI("https://example.com/./a/b")
+    func removeLeadingDot() {
+        let iri: RFC_3987.IRI = "https://example.com/./a/b"
         let normalized = iri.normalized()
         #expect(normalized.value.contains("/a/b"))
     }
 
     @Test("Remove double dot segments")
-    func removeDoubleDots() throws {
-        let iri = try RFC_3987.IRI("https://example.com/a/../b")
+    func removeDoubleDots() {
+        let iri: RFC_3987.IRI = "https://example.com/a/../b"
         let normalized = iri.normalized()
         #expect(normalized.value.contains("/b"))
         #expect(!normalized.value.contains("/a/"))
@@ -124,16 +124,16 @@ struct IRINormalizationTests {
 struct IRIToURITests {
 
     @Test("Convert simple IRI to URI")
-    func convertSimple() throws {
-        let iri = try RFC_3987.IRI("https://example.com/path")
-        let uri = iri.toURI()
+    func convertSimple() {
+        let iri: RFC_3987.IRI = "https://example.com/path"
+        let uri = iri.uriString
         #expect(uri == "https://example.com/path")
     }
 
     @Test("Convert IRI with spaces")
-    func convertWithSpaces() throws {
-        let iri = try RFC_3987.IRI("https://example.com/hello%20world")
-        let uri = iri.toURI()
+    func convertWithSpaces() {
+        let iri: RFC_3987.IRI = "https://example.com/hello%20world"
+        let uri = iri.uriString
         #expect(uri.contains("%20"))
     }
 }

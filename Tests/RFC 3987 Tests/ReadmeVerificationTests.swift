@@ -81,13 +81,13 @@ struct ReadmeVerificationTests {
 
     @Test("URI Conversion example")
     func uriConversionExample() throws {
-        // From README lines 97-99
+        // From README lines 100-102
         let iri = try RFC_3987.IRI("https://example.com/hello world")
-        let uri = iri.toURI()
+        let asciiString = iri.uriString
 
         // URL encoding may use + or %20 for spaces
-        #expect(uri.contains("example.com"))
-        #expect(uri.contains("hello"))
+        #expect(asciiString.contains("example.com"))
+        #expect(asciiString.contains("hello"))
     }
 
     @Test("IRI vs URI - IRI with Unicode")

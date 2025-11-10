@@ -13,3 +13,18 @@ public enum RFC_3987 {
         case conversionFailed(String)
     }
 }
+
+// MARK: - LocalizedError Conformance
+
+extension RFC_3987.IRIError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .invalidIRI(let value):
+            return "Invalid IRI: '\(value)'. IRIs must have a scheme and follow RFC 3987 syntax."
+        case .invalidURI(let value):
+            return "Invalid URI: '\(value)'"
+        case .conversionFailed(let reason):
+            return "IRI conversion failed: \(reason)"
+        }
+    }
+}
