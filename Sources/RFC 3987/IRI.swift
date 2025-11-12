@@ -138,8 +138,9 @@ extension RFC_3987 {
             // For schemes that define empty path equivalent to "/", use "/"
             // Per RFC 7230 Section 2.7.3: HTTP empty path normalized to "/"
             if let scheme = components.scheme,
-               ["http", "https"].contains(scheme),
-               components.path.isEmpty {
+                ["http", "https"].contains(scheme),
+                components.path.isEmpty
+            {
                 components.path = "/"
             }
 

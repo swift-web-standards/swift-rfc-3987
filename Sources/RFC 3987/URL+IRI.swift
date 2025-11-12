@@ -8,7 +8,8 @@ extension URL {
         public var description: String {
             switch self {
             case .invalidIRI(let iri):
-                return "Failed to convert IRI to URL. The IRI '\(iri)' is malformed and could not be converted to a valid URL even after percent-encoding."
+                return
+                    "Failed to convert IRI to URL. The IRI '\(iri)' is malformed and could not be converted to a valid URL even after percent-encoding."
             }
         }
     }
@@ -36,9 +37,10 @@ extension URL {
         allowedCharacters.formUnion(.urlPathAllowed)
         allowedCharacters.formUnion(.urlQueryAllowed)
 
-        let encoded = iri.value.addingPercentEncoding(
-            withAllowedCharacters: allowedCharacters
-        ) ?? iri.value
+        let encoded =
+            iri.value.addingPercentEncoding(
+                withAllowedCharacters: allowedCharacters
+            ) ?? iri.value
 
         guard let url = URL(string: encoded) else {
             throw IRIConversionError.invalidIRI(iri.value)
