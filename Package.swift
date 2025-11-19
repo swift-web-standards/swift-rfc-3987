@@ -13,8 +13,12 @@ let package = Package(
     products: [
         .library(
             name: "RFC 3987",
-            targets: ["RFC 3987", "RFC 3987 Foundation"]
-        )
+            targets: ["RFC 3987"]
+        ),
+        .library(
+            name: "RFC 3987 Foundation",
+            targets: ["RFC 3987 Foundation"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/swift-standards/swift-incits-4-1986", from: "0.0.1")
