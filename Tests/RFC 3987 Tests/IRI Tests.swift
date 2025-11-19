@@ -1,7 +1,7 @@
-import Foundation
 import Testing
-
+import Foundation
 @testable import RFC_3987
+@testable import RFC_3987_Foundation
 
 @Suite("IRI Validation")
 struct IRIValidationTests {
