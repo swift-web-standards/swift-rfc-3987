@@ -3,27 +3,27 @@ import Foundation
 @testable import RFC_3987
 @testable import RFC_3987_Foundation
 
-@Suite("README Verification")
-struct ReadmeVerificationTests {
+@Suite
+struct `README Verification` {
 
-    @Test("Creating IRIs - from string literal")
-    func creatingIRIsStringLiteral() {
+    @Test
+    func `Creating IRIs - from string literal`() {
         // From README lines 38-39
         let iri: RFC_3987.IRI = "https://example.com/path"
 
         #expect(iri.value == "https://example.com/path")
     }
 
-    @Test("Creating IRIs - with validation")
-    func creatingIRIsValidation() throws {
+    @Test
+    func `Creating IRIs - with validation`() throws {
         // From README lines 42-43
         let validatedIRI = try RFC_3987.IRI("https://example.com/寿司")
 
         #expect(validatedIRI.value == "https://example.com/寿司")
     }
 
-    @Test("Using Foundation URL - IRI.Representable conformance")
-    func foundationURLConformance() {
+    @Test
+    func `Using Foundation URL - IRI.Representable conformance`() {
         // From README lines 51-58
         let url = URL(string: "https://example.com")!
 
@@ -36,8 +36,8 @@ struct ReadmeVerificationTests {
         #expect(result == "https://example.com")
     }
 
-    @Test("Using Foundation URL - HTTP validation")
-    func foundationURLHTTPValidation() {
+    @Test
+    func `Using Foundation URL - HTTP validation`() {
         // From README line 61
         let url = URL(string: "https://example.com")!
         let isValid = RFC_3987.isValidHTTP(url)
@@ -45,24 +45,24 @@ struct ReadmeVerificationTests {
         #expect(isValid == true)
     }
 
-    @Test("Validation - validate IRI string")
-    func validationIRIString() {
+    @Test
+    func `Validation - validate IRI string`() {
         // From README lines 70-72
         let isValid = RFC_3987.isValidIRI("https://example.com")
 
         #expect(isValid == true)
     }
 
-    @Test("Validation - validate HTTP specifically")
-    func validationHTTP() {
+    @Test
+    func `Validation - validate HTTP specifically`() {
         // From README lines 75-77
         let isValid = RFC_3987.isValidHTTP("https://example.com")
 
         #expect(isValid == true)
     }
 
-    @Test("Validation - validate IRI.Representable types")
-    func validationRepresentableTypes() {
+    @Test
+    func `Validation - validate IRI.Representable types`() {
         // From README lines 80-83
         let url = URL(string: "https://example.com")!
         let isValid = RFC_3987.isValidHTTP(url)
@@ -70,8 +70,8 @@ struct ReadmeVerificationTests {
         #expect(isValid == true)
     }
 
-    @Test("Normalization example")
-    func normalizationExample() throws {
+    @Test
+    func `Normalization example`() throws {
         // From README lines 89-91
         let iri = try RFC_3987.IRI("HTTPS://EXAMPLE.COM:443/path")
         let normalized = iri.normalized()
@@ -79,8 +79,8 @@ struct ReadmeVerificationTests {
         #expect(normalized.value == "https://example.com/path")
     }
 
-    @Test("URI Conversion example")
-    func uriConversionExample() throws {
+    @Test
+    func `URI Conversion example`() throws {
         // From README lines 100-102
         let iri = try RFC_3987.IRI("https://example.com/hello world")
         let asciiString = iri.uriString
@@ -90,8 +90,8 @@ struct ReadmeVerificationTests {
         #expect(asciiString.contains("hello"))
     }
 
-    @Test("IRI vs URI - IRI with Unicode")
-    func iriVsUriExample() throws {
+    @Test
+    func `IRI vs URI - IRI with Unicode`() throws {
         // From README line 107 - IRI example
         let iri = try RFC_3987.IRI("https://例え.jp/寿司")
 
@@ -99,8 +99,8 @@ struct ReadmeVerificationTests {
         #expect(iri.value.contains("寿司"))
     }
 
-    @Test("RFC 3987 Compliance - requires scheme")
-    func complianceRequiresScheme() {
+    @Test
+    func `RFC 3987 Compliance - requires scheme`() {
         // From README line 119
         let withScheme = RFC_3987.isValidIRI("https://example.com")
         let withoutScheme = RFC_3987.isValidIRI("example.com")
@@ -109,16 +109,16 @@ struct ReadmeVerificationTests {
         #expect(withoutScheme == false)
     }
 
-    @Test("RFC 3987 Compliance - accepts Unicode")
-    func complianceAcceptsUnicode() throws {
+    @Test
+    func `RFC 3987 Compliance - accepts Unicode`() throws {
         // From README line 120
         let unicodeIRI = try RFC_3987.IRI("https://example.com/日本語")
 
         #expect(unicodeIRI.value.contains("日本語"))
     }
 
-    @Test("Protocol-based design - IRI.Representable")
-    func protocolBasedDesign() {
+    @Test
+    func `Protocol-based design - IRI.Representable`() {
         // From README line 16-17
         let url = URL(string: "https://test.com")!
 
