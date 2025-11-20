@@ -51,10 +51,10 @@ extension RFC_3987.IRI {
     /// ```
     ///
     /// - Parameter value: The IRI string
-    /// - Throws: IRIError.invalidIRI if the string is not a valid IRI
+    /// - Throws: IRI.Error.invalidIRI if the string is not a valid IRI
     public init(_ value: String) throws {
         guard RFC_3987.isValidIRI(value) else {
-            throw RFC_3987.IRIError.invalidIRI(value)
+            throw RFC_3987.IRI.Error.invalidIRI(value)
         }
         self.value = value
     }
