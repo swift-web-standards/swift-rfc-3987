@@ -21,7 +21,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-standards/swift-incits-4-1986", from: "0.0.1")
+        .package(url: "https://github.com/swift-standards/swift-incits-4-1986", from: "0.1.0")
     ],
     targets: [
         .target(
