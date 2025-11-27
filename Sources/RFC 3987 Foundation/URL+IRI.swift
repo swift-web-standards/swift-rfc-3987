@@ -1,5 +1,5 @@
-import Foundation
-import RFC_3987
+public import Foundation
+public import RFC_3987
 
 extension URL {
     /// Errors that can occur during IRI to URL conversion
