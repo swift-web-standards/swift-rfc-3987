@@ -1,5 +1,5 @@
 public import Foundation
-public import RFC_3987
+@_spi(Internal) public import RFC_3987
 
 extension URL {
     /// Errors that can occur during IRI to URL conversion
@@ -78,7 +78,10 @@ extension RFC_3987.IRI {
     ///
     /// - Parameter url: The URL to convert to an IRI
     public init(url: URL) {
-        self.init(unchecked: url.absoluteString)
+        self.init(
+            __unchecked: (),
+            value: url.absoluteString
+        )
     }
 
     /// Returns a normalized version of this IRI using Foundation's URL parsing
@@ -141,7 +144,10 @@ extension RFC_3987.IRI {
             return self
         }
 
-        return RFC_3987.IRI(unchecked: normalizedURL.absoluteString)
+        return RFC_3987.IRI.init(
+            __unchecked: (),
+            value: normalizedURL.absoluteString
+        )
     }
 }
 
@@ -154,7 +160,10 @@ extension URL: RFC_3987.IRI.Representable {
     /// Foundation's URL type already supports Unicode characters,
     /// making it naturally compatible with IRIs as defined in RFC 3987.
     public var iri: RFC_3987.IRI {
-        RFC_3987.IRI(unchecked: absoluteString)
+        RFC_3987.IRI(
+            __unchecked: (),
+            value: absoluteString
+        )
     }
 }
 

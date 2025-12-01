@@ -1,13 +1,11 @@
 //
-//  File.swift
+//  RFC_3987.ValidationMode.swift
 //  swift-rfc-3987
-//
-//  Created by Coen ten Thije Boonkkamp on 20/11/2025.
 //
 
 extension RFC_3987 {
     /// Validation mode for IRI checking
-    public enum ValidationMode {
+    public enum ValidationMode: Sendable {
         /// Lenient validation using basic syntax rules
         case lenient
 

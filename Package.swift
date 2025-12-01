@@ -38,7 +38,10 @@ let package = Package(
         ),
         .testTarget(
             name: "RFC 3987".tests,
-            dependencies: ["RFC 3987", "RFC 3987 Foundation"]
+            dependencies: [
+                "RFC 3987",
+                "RFC 3987 Foundation"
+            ]
         )
     ],
     swiftLanguageModes: [.v6]

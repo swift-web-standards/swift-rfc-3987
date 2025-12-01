@@ -1,9 +1,24 @@
-import INCITS_4_1986
+public import INCITS_4_1986
 
-
-public enum RFC_3987 {
-
-}
+/// RFC 3987: Internationalized Resource Identifiers (IRIs)
+///
+/// IRIs are a complement to URIs (RFC 3986) that allow the use of
+/// Unicode characters from the Universal Character Set (Unicode/ISO 10646).
+///
+/// ## Key Types
+///
+/// - ``IRI``: An Internationalized Resource Identifier
+///
+/// ## Example
+///
+/// ```swift
+/// let iri = try RFC_3987.IRI("https://example.com/寿司")
+/// ```
+///
+/// ## See Also
+///
+/// - [RFC 3987](https://www.rfc-editor.org/rfc/rfc3987)
+public enum RFC_3987 {}
 
 
 
